@@ -1,28 +1,18 @@
 import React from 'react';
 import './App.css';
-import {Route, BrowserRouter as Router, Link, Switch} from 'react-router-dom';
-import Home from './pages/Home';
-import Projects from './pages/Projects';
+import NavBar from './Components/NavBar';
+import {Route, BrowserRouter as Router, Switch} from 'react-router-dom';
+import Home from "./pages/Home";
+import Projects from "./pages/Projects"
 
 function App() {
   return (
     <Router>
-      <div className="App">
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/Projects">Projects</Link>
-            </li>
-          </ul>
-        </nav>
-        <Switch>
-          <Route path="/projects" component={Projects} />
-          <Route path="/" exact component={Home} />
-        </Switch>
-      </div>
+      <NavBar/>
+      <Switch>
+        <Route path="/projects" component={Projects} />
+        <Route path="/" component={Home} />
+      </Switch>
     </Router>
   );
 }
