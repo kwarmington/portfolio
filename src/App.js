@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Route, BrowserRouter as Router, Link} from 'react-router-dom';
+import {Route, BrowserRouter as Router, Link, Switch} from 'react-router-dom';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
 
@@ -18,8 +18,10 @@ function App() {
             </li>
           </ul>
         </nav>
-        <Route path="/" exact component={Home} />
-        <Route path="/projects" component={Projects} />
+        <Switch>
+          <Route path="/projects" component={Projects} />
+          <Route path="/" exact component={Home} />
+        </Switch>
       </div>
     </Router>
   );
