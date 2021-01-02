@@ -11,10 +11,12 @@ import {
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
+import LibraryBooksOutlinedIcon from '@material-ui/icons/LibraryBooksOutlined';
 import {Link} from 'react-router-dom';
 
 const routes = [
     {text: "Home", route:"/", icon:<HomeIcon />},
+    {text: "Skills", route: "/Skills", icon:<LibraryBooksOutlinedIcon />},
     {text: "Projects", route: "/Projects", icon:<FolderOpenIcon />}
 ]
 
