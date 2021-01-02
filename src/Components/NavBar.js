@@ -6,12 +6,16 @@ import {
   List,
   ListItem,
   ListItemText,
-  IconButton} from '@material-ui/core';
+  IconButton,
+  ListItemIcon} from '@material-ui/core';
+import HomeIcon from '@material-ui/icons/Home';
+import MenuIcon from '@material-ui/icons/Menu';
+import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import {Link} from 'react-router-dom';
 
 const routes = [
-    {text: "Home", route:"/"},
-    {text: "Projects", route: "/Projects"}
+    {text: "Home", route:"/", icon:<HomeIcon />},
+    {text: "Projects", route: "/Projects", icon:<FolderOpenIcon />}
 ]
 
 const useStyles = makeStyles({
@@ -46,11 +50,12 @@ export default function TemporaryDrawer() {
     >
         <List>
             {routes.map((item) => (
-            <ListItem button key={item.text}>
-                <Link to={item.route} style={{ textDecoration: 'none' }}>
-                    <ListItemText>{item.text}</ListItemText>
-                </Link>
-            </ListItem>
+              <Link key={item.text} to={item.route} style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.text} />
+                </ListItem>
+              </Link>
             ))}
         </List>
     </div>
@@ -60,7 +65,7 @@ export default function TemporaryDrawer() {
     <div>
         <React.Fragment key={'navBar'}>
         <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
-            Menu
+            <MenuIcon />
           </IconButton>
           <Drawer anchor={'right'} open={state['open']} onClose={toggleDrawer(false)}>
             {list}
