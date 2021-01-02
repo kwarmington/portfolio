@@ -1,23 +1,36 @@
+// Import Packages
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import { 
+import {Link} from 'react-router-dom';
+
+// Import Material UI Components
+import {makeStyles} from '@material-ui/core/styles';
+import {
   Drawer,
   List,
   ListItem,
   ListItemText,
   IconButton,
-  ListItemIcon} from '@material-ui/core';
-import HomeIcon from '@material-ui/icons/Home';
-import MenuIcon from '@material-ui/icons/Menu';
-import FolderOpenIcon from '@material-ui/icons/FolderOpen';
-import LibraryBooksOutlinedIcon from '@material-ui/icons/LibraryBooksOutlined';
-import {Link} from 'react-router-dom';
+  ListItemIcon,
+  Divider
+} from '@material-ui/core';
+
+// Import Icons
+import {
+  Home as HomeIcon,
+  Menu as MenuIcon,
+  FolderOpen as FolderOpenIcon,
+  LibraryBooksOutlined as BooksIcon
+} from '@material-ui/icons';
 
 const routes = [
-    {text: "Home", route:"/", icon:<HomeIcon />},
-    {text: "Skills", route: "/Skills", icon:<LibraryBooksOutlinedIcon />},
-    {text: "Projects", route: "/Projects", icon:<FolderOpenIcon />}
+  { text: "Home", route: "/", icon: <HomeIcon/> },
+  { text: "Skills", route: "/Skills", icon: <BooksIcon/> },
+  { text: "Projects", route: "/Projects", icon: <FolderOpenIcon/> }
+]
+
+const links = [
+  { text: "LinkedIn", route: "https://linkedin.com/in/kieran-warmington" }
 ]
 
 const useStyles = makeStyles({
@@ -45,34 +58,44 @@ export default function TemporaryDrawer() {
 
   const list = (
     <div
-    className={clsx(classes.list)}
+      className={clsx(classes.list)}
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
-        <List>
-            {routes.map((item) => (
-              <Link key={item.text} to={item.route} style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.text} />
-                </ListItem>
-              </Link>
-            ))}
-        </List>
+      <List>
+        {routes.map((route) => (
+          <Link key={route.text} to={route.route} style={{ textDecoration: 'none' }}>
+            <ListItem button>
+              <ListItemIcon>{route.icon}</ListItemIcon>
+              <ListItemText primary={route.text} />
+            </ListItem>
+          </Link>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {links.map((link) => (
+          <a key={link.text} href={link.route}>
+            <ListItem button>
+              <ListItemText primary={link.text} />
+            </ListItem>
+          </a>
+        ))}
+      </List>
     </div>
   );
 
   return (
     <div>
-        <React.Fragment key={'navBar'}>
+      <React.Fragment key={'navBar'}>
         <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
-            <MenuIcon />
-          </IconButton>
-          <Drawer anchor={'right'} open={state['open']} onClose={toggleDrawer(false)}>
-            {list}
-          </Drawer>
-        </React.Fragment>
+          <MenuIcon />
+        </IconButton>
+        <Drawer anchor={'right'} open={state['open']} onClose={toggleDrawer(false)}>
+          {list}
+        </Drawer>
+      </React.Fragment>
     </div>
   );
 }
