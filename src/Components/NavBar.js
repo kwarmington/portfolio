@@ -1,14 +1,15 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import { 
+  Drawer, 
+  Button, 
+  List,
+  ListItem,
+  ListItemText} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 
-const listItems = [
+const routes = [
     {text: "Home", route:"/"},
     {text: "Projects", route: "/Projects"}
 ]
@@ -25,31 +26,26 @@ const useStyles = makeStyles({
 export default function TemporaryDrawer() {
   const classes = useStyles();
   const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
+    open: false,
   });
 
-  const toggleDrawer = (anchor, open) => (event) => {
+  const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
 
-    setState({ ...state, [anchor]: open });
+    setState({ ...state, 'open': open });
   };
 
-  const list = (anchor) => (
+  const list = (
     <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-      })}
+    className={clsx(classes.list)}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
     >
         <List>
-            {listItems.map((item) => (
+            {routes.map((item) => (
             <ListItem button key={item.text}>
                 <Link to={item.route} style={{ textDecoration: 'none' }}>
                     <ListItemText>{item.text}</ListItemText>
@@ -62,14 +58,12 @@ export default function TemporaryDrawer() {
 
   return (
     <div>
-      {['left', 'right', 'top', 'bottom'].map((anchor) => (
-        <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-          <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-            {list(anchor)}
+        <React.Fragment key={'navBar'}>
+          <Button onClick={toggleDrawer(true)}>Menu</Button>
+          <Drawer anchor={'right'} open={state['open']} onClose={toggleDrawer(false)}>
+            {list}
           </Drawer>
         </React.Fragment>
-      ))}
     </div>
   );
 }
