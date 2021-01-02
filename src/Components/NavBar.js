@@ -2,11 +2,11 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { 
-  Drawer, 
-  Button, 
+  Drawer,
   List,
   ListItem,
-  ListItemText} from '@material-ui/core';
+  ListItemText,
+  IconButton} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 
 const routes = [
@@ -59,7 +59,9 @@ export default function TemporaryDrawer() {
   return (
     <div>
         <React.Fragment key={'navBar'}>
-          <Button onClick={toggleDrawer(true)}>Menu</Button>
+        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
+            Menu
+          </IconButton>
           <Drawer anchor={'right'} open={state['open']} onClose={toggleDrawer(false)}>
             {list}
           </Drawer>
