@@ -20,7 +20,8 @@ import {
   Home as HomeIcon,
   Menu as MenuIcon,
   FolderOpen as FolderOpenIcon,
-  LibraryBooksOutlined as BooksIcon
+  LibraryBooksOutlined as BooksIcon,
+  LinkedIn as LinkedInIcon
 } from '@material-ui/icons';
 
 const routes = [
@@ -30,7 +31,7 @@ const routes = [
 ]
 
 const links = [
-  { text: "LinkedIn", route: "https://linkedin.com/in/kieran-warmington" }
+  { text: "LinkedIn", route: "https://linkedin.com/in/kieran-warmington", icon: <LinkedInIcon/> }
 ]
 
 const useStyles = makeStyles({
@@ -76,8 +77,9 @@ export default function TemporaryDrawer() {
       <Divider />
       <List>
         {links.map((link) => (
-          <a key={link.text} href={link.route}>
+          <a key={link.text} href={link.route} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
             <ListItem button>
+              <ListItemIcon>{link.icon}</ListItemIcon>
               <ListItemText primary={link.text} />
             </ListItem>
           </a>
