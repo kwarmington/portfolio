@@ -1,5 +1,5 @@
 // Import Packages
-import React from 'react';
+import React, {useState} from 'react';
 import clsx from 'clsx';
 import {Link} from 'react-router-dom';
 
@@ -45,7 +45,7 @@ const useStyles = makeStyles({
 
 export default function TemporaryDrawer() {
   const classes = useStyles();
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     open: false,
   });
 
