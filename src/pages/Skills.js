@@ -1,8 +1,13 @@
 import React from 'react';
+import BarChart from 'Components/BarChart.js'
 
-function Skills(){
+function Skills() {
     return (
-        <h1>Skills</h1>
+        <div>
+            <h1>Skills</h1>
+            <BarChart />
+        </div>
+
     );
 }
 
