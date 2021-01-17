@@ -7,25 +7,15 @@ import {
   ArgumentAxis,
   ValueAxis,
 } from '@devexpress/dx-react-chart-material-ui';
-
 import { Animation } from '@devexpress/dx-react-chart';
+import PropTypes from 'prop-types';
 
-const data = [
-  { year: '1950', population: 2.525 },
-  { year: '1960', population: 3.018 },
-  { year: '1970', population: 3.682 },
-  { year: '1980', population: 4.440 },
-  { year: '1990', population: 5.310 },
-  { year: '2000', population: 6.127 },
-  { year: '2010', population: 6.930 },
-];
-
-export default class Demo extends React.PureComponent {
+export default class BarChart extends React.PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
-      data,
+      data: this.props.data,
     };
   }
 
@@ -41,13 +31,20 @@ export default class Demo extends React.PureComponent {
           <ValueAxis max={7} />
 
           <BarSeries
-            valueField="population"
-            argumentField="year"
+            valueField={this.props.yAxisName}
+            argumentField={this.props.xAxisName}
           />
-          <Title text="World population" />
+          <Title text={this.props.title} />
           <Animation />
         </Chart>
       </Paper>
     );
   }
 }
+
+BarChart.propTypes = {
+  data: PropTypes.objectOf(PropTypes.array),
+  title: PropTypes.string,
+  xAxisName: PropTypes.string,
+  yAxisName: PropTypes.string
+};
